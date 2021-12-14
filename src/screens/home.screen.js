@@ -1,18 +1,23 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { SafeAreaView, Text, Button } from 'react-native'
+import { signOut } from '../../Firebase';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   
   return (
-    <View>
+    <SafeAreaView>
       <Text>Home Screen</Text>
       <Button
         title="Go to chat screen"
         onPress={() => navigation.navigate("Chat")}
       />
-    </View>
+      <Button
+        title="Sign Out"
+        onPress={() => signOut()}
+      />
+    </SafeAreaView>
   )
 }
 

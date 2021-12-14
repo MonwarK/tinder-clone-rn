@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import { ImageBackground, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import tw from 'tailwind-rn';
 import { Ionicons } from '@expo/vector-icons';
-import useAuth from '../context/auth.context';
+import { register } from '../../Firebase';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { signInWithEmailAndPassword, error } = useAuth()
   
   return (
     <ImageBackground 
@@ -31,29 +30,21 @@ const LoginScreen = () => {
             { maxWidth: 300, width: "80%" }
           ]}
         >
-          <Text style={tw("text-center text-2xl mb-5")}>Login</Text>
+          <Text style={tw("text-center text-2xl mb-5")}>Register</Text>
           <TextInput 
             autoCapitalize='none'
             style={tw('py-3 w-full border-b mb-5')}
             placeholder='Email'
             onChangeText={(e) => setEmail(e)}
-            value={email}
           />
           <TextInput 
             style={tw('py-3 w-full border-b mb-5')}
             placeholder='Password'
             secureTextEntry
             onChangeText={(p) => setPassword(p)}
-            value={password}
           />
-          {error && (
-            <Text style={tw('text-red-500 mb-5')}>{error}</Text>
-          )}
-          <TouchableOpacity 
-            onPress={() => signInWithEmailAndPassword(email, password)}
-            style={tw("w-full bg-red-400 p-4 rounded-full")}
-          >
-            <Text style={tw("text-center text-white")}>Login</Text>
+          <TouchableOpacity onPress={() => register(email, password)} style={tw("w-full bg-red-400 p-4 rounded-full")}>
+            <Text style={tw("text-center text-white")}>Register</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -61,4 +52,4 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen
+export default RegisterScreen
